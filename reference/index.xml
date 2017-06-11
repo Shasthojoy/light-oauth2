@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>References on Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <link>https://networknt.github.io/light-oauth2/reference/</link>
+    <description>Recent content in References on Light OAuth2 - OAuth2 Serivces based on light-4j</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license</copyright>
+    <lastBuildDate>Sun, 12 Feb 2017 19:36:42 -0500</lastBuildDate>
+    
+	<atom:link href="https://networknt.github.io/light-oauth2/reference/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>References</title>
+      <link>https://networknt.github.io/light-oauth2/reference/</link>
+      <pubDate>Sun, 12 Feb 2017 19:36:42 -0500</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/reference/</guid>
+      <description>Specifications  OpenID Connect Core 1.0 incorporating errata set 1 - OpenID Connect core OAuth 2.0 Multiple Response Type Encoding Practices - OpenID Connect multiple response types OAuth 2.0 Form Post Response Mode - Form post response mode OAuth 2.0 Threat Model and Security Considerations - Information on all sorts of threats in OAuth 2.0 specification.  Articles and Blogs  OAuth 2 and Fragment encoding - Some browsers changed behavior for fragment encoding and the impact on OAuth 2.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Architecture-rsses on Light OAuth2 - OAuth2 Serivces based on Light Java</title>
-    <link>https://networknt.github.io/light-oauth2/architecture/index.xml</link>
-    <description>Recent content in Architecture-rsses on Light OAuth2 - OAuth2 Serivces based on Light Java</description>
+    <title>Architectures on Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <link>https://networknt.github.io/light-oauth2/architecture/</link>
+    <description>Recent content in Architectures on Light OAuth2 - OAuth2 Serivces based on light-4j</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
     <lastBuildDate>Sat, 31 Dec 2016 21:16:50 -0500</lastBuildDate>
-    <atom:link href="https://networknt.github.io/light-oauth2/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="https://networknt.github.io/light-oauth2/architecture/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Architecture</title>
@@ -16,45 +18,7 @@
       <pubDate>Sat, 31 Dec 2016 21:16:50 -0500</pubDate>
       
       <guid>https://networknt.github.io/light-oauth2/architecture/</guid>
-      <description>
-
-&lt;h2 id=&#34;microservices&#34;&gt;Microservices&lt;/h2&gt;
-
-&lt;p&gt;It is built on top of Light-Java framework as 7 microservices and each serivce has several
-endpoints to support user login, access token retrieval, user registration, service
-registration, client registration and public key certificate distribution. It can support
-millions users and thousands of clients and services with scopes. It should be easily handle
-thousands of concurrent users per instance and each service can be scaled individually if
-necessary.&lt;/p&gt;
-
-&lt;h2 id=&#34;in-memory-data-grid&#34;&gt;In-Memory Data Grid&lt;/h2&gt;
-
-&lt;p&gt;Hazelcast is used as Data Grid across multiple services and majority of operations
-won&amp;rsquo;t hit database server for best performance. This also makes database as plugin
-so that persistence layer can be anything from SQL to NoSQL.&lt;/p&gt;
-
-&lt;h2 id=&#34;built-in-security&#34;&gt;Built-in Security&lt;/h2&gt;
-
-&lt;p&gt;Except code, token and key services, other services are protected by OAuth2 itself and
-additional security as well. These sevices can be deployed at different locations within
-your network for maximum security and flexibility.&lt;/p&gt;
-
-&lt;h2 id=&#34;multiple-database-support&#34;&gt;Multiple Database Support&lt;/h2&gt;
-
-&lt;p&gt;Currently, Oralce, MySQL and Postgres are supported, but other databases(sql or nosql)
-can be easily supported by implementing a MapStore of Hazelcast and create a initial
-db script.&lt;/p&gt;
-
-&lt;h2 id=&#34;easy-to-customize-and-integrate&#34;&gt;Easy to customize and integrate&lt;/h2&gt;
-
-&lt;p&gt;Each service can be easily customized and won&amp;rsquo;t impact other services. Also, it is very
-easy to extend in order to integrate with other existing services within your organization.&lt;/p&gt;
-
-&lt;h2 id=&#34;cloud-and-docker-friendly&#34;&gt;Cloud and Docker friendly&lt;/h2&gt;
-
-&lt;p&gt;Designed as native cloud services on top of light weight Java framework to lower the cost of
-VM provisioning.&lt;/p&gt;
-</description>
+      <description>Microservices It is built on top of Light-Java framework as 7 microservices and each serivce has several endpoints to support user login, access token retrieval, user registration, service registration, client registration and public key certificate distribution. It can support millions users and thousands of clients and services with scopes. It should be easily handle thousands of concurrent users per instance and each service can be scaled individually if necessary.</description>
     </item>
     
   </channel>
