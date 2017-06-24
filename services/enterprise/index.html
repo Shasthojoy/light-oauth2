@@ -138,7 +138,7 @@
         </div>
       
       <div class="name">
-        <strong>Light OAuth2 - OAuth2 Serivces based on light-4j <span class="version">1.3.1</span></strong>
+        <strong>Light OAuth2 - OAuth2 Serivces based on light-4j <span class="version">1.3.3</span></strong>
         
           <br>
           networknt/light-oauth2
@@ -470,6 +470,18 @@ query component of the authorization endpoint URI using the
 request and callback. The authorization server includes this value when redirecting
 the user-agent back to the client. The parameter SHOULD be used for preventing
 cross-site request forgery.</p>
+
+<ul>
+<li>code_challenge</li>
+</ul>
+
+<p>OPTIONAL. PKCE Code challenge. Required for Mobile Native App</p>
+
+<ul>
+<li>code_challenge_method</li>
+</ul>
+
+<p>OPTIONAL. S256 or plain if platform doesn&rsquo;t support S256.</p>
 
 <h2 id="authorization-response">Authorization Response</h2>
 
@@ -839,6 +851,12 @@ request, and their values MUST be identical.</p>
 
 <p>REQUIRED, as BASIC authorization header with encoded client_id:client_secret
 to authenticate with the authorization server.</p>
+
+<ul>
+<li>code_verifier</li>
+</ul>
+
+<p>OPTIONAL, PKCE code verifier that used by Mobile Native App</p>
 
 <h3 id="response">Response</h3>
 

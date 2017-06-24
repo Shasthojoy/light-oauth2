@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>keytool - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <title>OpenID Connect - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
     <meta name="generator" content="Hugo 0.20.6" />
 
     
     <meta name="description" content="Light OAuth2 Docs">
     
-    <link rel="canonical" href="https://networknt.github.io/light-oauth2/tools/keytool/">
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/openid/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/light-oauth2/tools/keytool/">
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/openid/">
     <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
     <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        keytool
+        OpenID Connect
       </div>
     </div>
 
@@ -407,20 +407,13 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>keytool </h1>
+			<h1>OpenID Connect </h1>
 
-			<p>In production environment, it is recommended to buy certificates to sign the JWT
-token; however, most people will use self-signed certificate on non-production
-environment. Java Keytool is a very convenient tool to generate key pair and public
-key certificate.</p>
+			
 
-<p>Here is an example to generate key pair and public key certificate in two steps.</p>
+<h2 id="references">References</h2>
 
-<pre><code>keytool -genkey -keyalg RSA -alias selfsigned -keystore primary.jks -storepass password -validity 3600 -keysize 2048
-
-keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
-
-</code></pre>
+<p><a href="https://medium.com/@darutk/full-scratch-implementor-of-oauth-and-openid-connect-talks-about-findings-55015f36d1c3">Full-Scratch Implementor of OAuth and OpenID Connect Talks About Findings</a></p>
 
 
 			<aside class="copyright" role="note">
@@ -439,34 +432,18 @@ keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/light-oauth2/tutorials/longlive/" title="How to generate long lived token">
-        <span class="direction">
-          Previous
-        </span>
-        <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
-          <div class="stretch">
-            <div class="title">
-              How to generate long lived token
-            </div>
-          </div>
-        </div>
-      </a>
-  
   </div>
 
   <div class="next">
   
-      <a href="https://networknt.github.io/light-oauth2/tutorials/" title="Tutorials">
+      <a href="https://networknt.github.io/light-oauth2/services/pkce/" title="Proof key for code exchange (PKCE)">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Tutorials
+              Proof key for code exchange (PKCE)
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

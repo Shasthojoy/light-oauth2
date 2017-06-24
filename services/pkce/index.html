@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>keytool - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <title>Proof key for code exchange (PKCE) - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
     <meta name="generator" content="Hugo 0.20.6" />
 
     
     <meta name="description" content="Light OAuth2 Docs">
     
-    <link rel="canonical" href="https://networknt.github.io/light-oauth2/tools/keytool/">
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/pkce/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/light-oauth2/tools/keytool/">
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/pkce/">
     <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
     <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        keytool
+        Proof key for code exchange (PKCE)
       </div>
     </div>
 
@@ -407,18 +407,164 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>keytool </h1>
+			<h1>Proof key for code exchange (PKCE) </h1>
 
-			<p>In production environment, it is recommended to buy certificates to sign the JWT
-token; however, most people will use self-signed certificate on non-production
-environment. Java Keytool is a very convenient tool to generate key pair and public
-key certificate.</p>
+			
 
-<p>Here is an example to generate key pair and public key certificate in two steps.</p>
+<p>Public OAuth clients that use the code grant and run on smartphones are susceptible to
+a code interception attack. Fortunately, this attack can be successfully prevented by
+establishing a secure binding between the authorisation request and the subsequent token
+request.</p>
 
-<pre><code>keytool -genkey -keyalg RSA -alias selfsigned -keystore primary.jks -storepass password -validity 3600 -keysize 2048
+<p>The OAuth work group devised an official mini extension of the protocol for that, called
+Proof Key for Code Exchange (PKCE) and published in September 2015 as RFC 7636. It is a
+countermeasure against the authorization code interception attack.</p>
 
-keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
+<h2 id="how-does-pkce-work">How does PKCE work?</h2>
+
+<ul>
+<li>The client creates a large random string called the code verifier.</li>
+<li>The client then computes its SHA-256 hash, called the code_challenge.</li>
+<li>The client passes the code_challenge and code_challenge_method (a keyword for the SHA-256
+hash) along with the regular authorisation request parameters to the OAuth2 server. The
+server stores them until a token request is received by the client.</li>
+<li>When the client receives the authorisation code, it makes a token request with the
+code_verifier included. The OAuth2 server recomputes the code challenge, and if it matches
+the original one, releases the requested tokens.</li>
+</ul>
+
+<p>PKCE essentially works by preventing a malicious app or code had intercepted the code (as it
+was passed from the system browser / the OS to the app) from exchanging it for a token.</p>
+
+<p>The latest release of the light-oauth2 server adds complete support for PKCE. In order to make
+use of it a public client just needs to set the appropriate PKCE request parameters. The server
+will take care of the rest.</p>
+
+<p>We also provide utility class CodeVerifierUtil in light-4j utility module to assist Java client
+to create code verifier and code challenge.</p>
+
+<h2 id="pkce-authorization-request">PKCE Authorization Request</h2>
+
+<p>An authorization request that uses PKCE goes out with</p>
+
+<p>code_challenge parameter and optionally with code_challenge_method parameter.</p>
+
+<p>The value of code_challenge parameter is computed by applying a code challenge method (= computation
+logic) to a code verifier.</p>
+
+<p>A code verifier itself is a random string using characters of [A-Z] / [a-z] / [0-9] / &ldquo;-&rdquo; / &ldquo;.&rdquo; / &ldquo;_&rdquo; / &ldquo;~&ldquo;,
+with a minimum length of 43 characters and a maximum length of 128 characters.</p>
+
+<p>The defined code challenge methods are plain and S256. Respective computation logics to convert a code
+verifier into a code challenge are as follows.</p>
+
+<ul>
+<li><p>plain code_challenge = code_verifier</p></li>
+
+<li><p>S256  code_challenge = BASE64URL-ENCODE(SHA256(ASCII(code_verifier)))</p></li>
+</ul>
+
+<p>The plain method does not change the input, so the value of code_verifier and the resultant value
+of code_challenge are equal.</p>
+
+<p>The S256 method computes the SHA-256 hash of the input and then encodes the hash value using Base64-URL.</p>
+
+<p>When the used code challenge method is S256, a client application must tell it by including
+code_challenge_method=S256 parameter in an authorization request. When code_challenge_method parameter
+is omitted, an authorization server assumes plain as the default value.</p>
+
+<h2 id="pkce-authorization-response">PKCE Authorization Response</h2>
+
+<p>After generating an authorization code, an authorization server saves it into its in-memory data grid
+with the code challenge and the code challenge method contained in the authorization request.</p>
+
+<p>The authorization server will use the saved code challenge and the code challenge method later to
+verify a token request from the client application.</p>
+
+<p>A response from the authorization endpoint has nothing special for PKCE. It&rsquo;s a normal response as usual.</p>
+
+<h2 id="pkce-token-request">PKCE Token Request</h2>
+
+<p>After receiving an authorization code from an authorization server, a client application makes a token
+request. In addition to the authorization code, the token request must include the code verifier
+used to compute the code challenge.</p>
+
+<p>The name of the request parameter to specify a code verifier is code_verifier.</p>
+
+<h2 id="pkce-token-response">PKCE Token Response</h2>
+
+<p>A token endpoint of an authorization server that supports PKCE checks whether a token request contains
+a valid code verifier.</p>
+
+<p>Of course, this check is performed only when grant_type is authorization_code and the authorization
+code contained in the token request is associated with a code challenge.</p>
+
+<p>If a token request does not contain a valid code verifier although the conditions above meet, the
+request is regarded as from a malicious application and the authorization server returns an error
+response.</p>
+
+<p>Verification is performed by comparing two code challenges.</p>
+
+<p>One is what was contained in the authorization request and is stored in the in-memory data grid. The
+other is what an authorization server computes using the code verifier contained in the token request
+and the code challenge method stored in the in-memory data grid.</p>
+
+<p>If the two code challenges are equal, the token request can be regarded as from the legitimate client
+application that has made the original authorization request. Otherwise, the token request must be
+regarded from a malicious application.</p>
+
+<p>If a token request is verified, an authorization server issues an access token as usual.</p>
+
+<h2 id="errors">Errors</h2>
+
+<p>The following errors are PKCE specific</p>
+
+<pre><code>ERR12033:
+  statusCode: 400
+  code: ERR12033
+  message: INVALID_CODE_CHALLENGE_METHOD
+  description: Invalid PKCE code challenge method %s.
+
+ERR12034:
+  statusCode: 400
+  code: ERR12034
+  message: CODE_CHALLENGE_TOO_SHORT
+  description: PKCE codeChallenge length under lower limit, codeChallenge = %s
+ERR12035:
+  statusCode: 400
+  code: ERR12035
+  message: CODE_CHALLENGE_TOO_LONG
+  description: PKCE codeChallenge length over upper limit, codeChallenge = %s
+ERR12036:
+  statusCode: 400
+  code: ERR12036
+  message: INVALID_CODE_CHALLENGE_FORMAT
+  description: PKCE codeChallenge format is invalid, codeChallenge = %s
+ERR12037:
+  statusCode: 400
+  code: ERR12037
+  message: INVALID_CODE_VERIFIER_FORMAT
+  description: PKCE codeVerifier format is invalid, codeVerifier = %s
+ERR12038:
+  statusCode: 400
+  code: ERR12038
+  message: CODE_VERIFIER_TOO_SHORT
+  description: PKCE codeVerifier length under lower limit , codeVerifier = %s
+ERR12039:
+  statusCode: 400
+  code: ERR12039
+  message: CODE_VERIFIER_TOO_LONG
+  description: PKCE codeVerifier length over upper limit , codeVerifier = %s
+ERR12040:
+  statusCode: 400
+  code: ERR12040
+  message: CODE_VERIFIER_MISSING
+  description: PKCE codeVerifier is not specified
+ERR12041:
+  statusCode: 400
+  code: ERR12041
+  message: CODE_VERIFIER_FAILED
+  description: PKCE verification failed
 
 </code></pre>
 
@@ -439,7 +585,7 @@ keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/light-oauth2/tutorials/longlive/" title="How to generate long lived token">
+      <a href="https://networknt.github.io/light-oauth2/services/openid/" title="OpenID Connect">
         <span class="direction">
           Previous
         </span>
@@ -449,7 +595,7 @@ keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
           </div>
           <div class="stretch">
             <div class="title">
-              How to generate long lived token
+              OpenID Connect
             </div>
           </div>
         </div>
@@ -459,14 +605,14 @@ keytool -export -alias selfsigned -keystore primary.jks -rfc -file primary.crt
 
   <div class="next">
   
-      <a href="https://networknt.github.io/light-oauth2/tutorials/" title="Tutorials">
+      <a href="https://networknt.github.io/light-oauth2/services/custom/" title="Custom Grant Type in Enterprise Edition">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Tutorials
+              Custom Grant Type in Enterprise Edition
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

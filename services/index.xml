@@ -7,10 +7,39 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 09:37:52 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 24 Jun 2017 08:44:23 -0400</lastBuildDate>
     
 	<atom:link href="https://networknt.github.io/light-oauth2/services/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OpenID Connect</title>
+      <link>https://networknt.github.io/light-oauth2/services/openid/</link>
+      <pubDate>Sat, 24 Jun 2017 08:44:23 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/openid/</guid>
+      <description>References Full-Scratch Implementor of OAuth and OpenID Connect Talks About Findings</description>
+    </item>
+    
+    <item>
+      <title>Proof key for code exchange (PKCE)</title>
+      <link>https://networknt.github.io/light-oauth2/services/pkce/</link>
+      <pubDate>Sat, 24 Jun 2017 08:05:13 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/pkce/</guid>
+      <description>Public OAuth clients that use the code grant and run on smartphones are susceptible to a code interception attack. Fortunately, this attack can be successfully prevented by establishing a secure binding between the authorisation request and the subsequent token request.
+The OAuth work group devised an official mini extension of the protocol for that, called Proof Key for Code Exchange (PKCE) and published in September 2015 as RFC 7636. It is a countermeasure against the authorization code interception attack.</description>
+    </item>
+    
+    <item>
+      <title>Custom Grant Type in Enterprise Edition</title>
+      <link>https://networknt.github.io/light-oauth2/services/custom/</link>
+      <pubDate>Sat, 24 Jun 2017 08:04:57 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/custom/</guid>
+      <description>There are four standard grant types in OAuth2 spec and it outlines how to add custom grant types. With more and more uses asking for some special integration with our OAuth2 services, we are adding the following custom grant types. These are non-standard and will only be used with a special client_type called trusted in most of the cases.
+client_authenticated_user This particular grant type is to address the following use cases.</description>
+    </item>
     
     <item>
       <title>Services</title>
@@ -21,7 +50,10 @@
       <description>There are two editions of OAuth2 servers available and each edition has different set of services and endpoints. For Enterprise edition, there are 7 services with numeric endpoints. Provider edition is still in planning phase but it will have more features than Enterprise edition.
 The following links documented services and endpoints served by each service for two editions.
 Enterprise edition
-Provider edition</description>
+Provider edition
+Custom grant type
+PKCE
+OpenID Connect</description>
     </item>
     
     <item>
