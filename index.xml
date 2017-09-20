@@ -7,10 +7,86 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license</copyright>
-    <lastBuildDate>Sat, 24 Jun 2017 08:44:23 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 19 Sep 2017 21:07:30 -0400</lastBuildDate>
     
 	<atom:link href="https://networknt.github.io/light-oauth2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Refresh Token</title>
+      <link>https://networknt.github.io/light-oauth2/services/refresh-token/</link>
+      <pubDate>Tue, 19 Sep 2017 21:07:30 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/refresh-token/</guid>
+      <description>Refresh Token Refresh Token is issued in Authorization Code Grant and Resource Owner Password Credentials Grant along with access token. Also, for maximum security, a refresh token is issued every time the old refresh token is used to renew an access token.
+This service is listening to port number 6886.
+Here is the specification
+swagger: &#39;2.0&#39; info: version: &amp;quot;1.0.0&amp;quot; title: OAuth2 Refresh Token Management description: OAuth2 refresh token management microservices endpoints.</description>
+    </item>
+    
+    <item>
+      <title>Key Distribution</title>
+      <link>https://networknt.github.io/light-oauth2/services/key/</link>
+      <pubDate>Tue, 19 Sep 2017 21:06:21 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/key/</guid>
+      <description>Key In microservices architecture, the traditional way of copying public key certificates to hosts of services is not working. With container orchestration tool like Kubernetes old containers can be shutdown and new container can be started at anytime. So the push certificates to services has to be changed to pull certificates from OAuth2 server instead. This service is designed to pull public key certificate based on keyId that is in the JWT token header.</description>
+    </item>
+    
+    <item>
+      <title>User Management</title>
+      <link>https://networknt.github.io/light-oauth2/services/user/</link>
+      <pubDate>Tue, 19 Sep 2017 21:05:10 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/user/</guid>
+      <description>User This is a service for user registration and management. The OAuth server supports integration with other user management system like active directory or LDAP. However, for most enterprise customers, their customer information normally will be in database. This service provides a database table for user management and several endpoints to manage users.
+In OAuth 2.0 specification, user is normally called resource owner.
+User Type Currently there are three user types to support.</description>
+    </item>
+    
+    <item>
+      <title>Client Registration</title>
+      <link>https://networknt.github.io/light-oauth2/services/client/</link>
+      <pubDate>Tue, 19 Sep 2017 21:03:44 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/client/</guid>
+      <description>Client Before initiating the protocol, the client registers with the authorization server. The means through which the client registers with the authorization server are not defined in OAuth 2.0 specification.
+As an extension, we have implemented client registration/on-boarding as a micro service that exposes several endpoints.
+Before digging into the details of implementation, let&amp;rsquo;s clarify some concepts about client.
+Client Type OAuth defines two client types, based on their ability to authenticate securely with the authorization server (i.</description>
+    </item>
+    
+    <item>
+      <title>Service Registration</title>
+      <link>https://networknt.github.io/light-oauth2/services/service/</link>
+      <pubDate>Tue, 19 Sep 2017 21:02:27 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/service/</guid>
+      <description>Service Every micro service or API needs to register itself to OAuth2 server in order to control who can access it. During the registration/on-boarding, a list of scopes defined in the OpenAPI specification should be populated as well. This list of scopes will be used for client to register scopes in order to access this particular service or API.
+This service has several endpoints and listening to port 6883.</description>
+    </item>
+    
+    <item>
+      <title>Token Endpoint</title>
+      <link>https://networknt.github.io/light-oauth2/services/token/</link>
+      <pubDate>Tue, 19 Sep 2017 21:01:03 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/token/</guid>
+      <description>Token This is a post endpoint to get JSON web tokens. Currently, it support three different grant types: authorization_code, client_credentials and password.
+Authorization Code Grant Type Request The client makes a request to the token endpoint by sending the following parameters using the &amp;ldquo;application/x-www-form-urlencoded&amp;rdquo; format.
+ grant_type   REQUIRED. Value MUST be set to &amp;ldquo;authorization_code&amp;rdquo;.
+ code   REQUIRED. The authorization code received from the authorization server.</description>
+    </item>
+    
+    <item>
+      <title>Authorization Code</title>
+      <link>https://networknt.github.io/light-oauth2/services/code/</link>
+      <pubDate>Tue, 19 Sep 2017 20:57:08 -0400</pubDate>
+      
+      <guid>https://networknt.github.io/light-oauth2/services/code/</guid>
+      <description>Code This is a service that support authorization code grant type. The authorization code grant type is used to obtain both access tokens and refresh tokens and is optimized for confidential clients. Since this is a redirection-based flow, the client must be capable of interacting with the resource owner&amp;rsquo;s user-agent (typically a web browser) and capable of receiving incoming requests (via redirection) from the authorization server.
+The service accepts user credentials and redirects back authorization code with redirect URI defined in the client registration or overwritten it by passing in a redirect URI in the request.</description>
+    </item>
     
     <item>
       <title>OpenID Connect</title>
@@ -144,9 +220,9 @@ OpenID Connect</description>
       <pubDate>Sun, 01 Jan 2017 09:37:32 -0500</pubDate>
       
       <guid>https://networknt.github.io/light-oauth2/services/enterprise/</guid>
-      <description>There are six standard services that cover standard OAuth2 grant flows and extended features like service on-boarding, client on-boarding, user management and public key certificate distribution.
+      <description>There are 7 standard services that cover standard OAuth2 grant flows and extended features like service on-boarding, client on-boarding, user management and public key certificate distribution.
 This document only describe the features and processes of each service. Please refer to tutorial on how to access these services.
-Code This is a service that support authorization code grant type. The authorization code grant type is used to obtain both access tokens and refresh tokens and is optimized for confidential clients.</description>
+ Code - Login to OAuth2 and get authorization code Token - Token endpoint of OAuth2 provider Service - Service registration endpoint Client - Client registration endpoint User - User management endpoint Key - Public key certificate distribution Refresh Token - Refresh token service  </description>
     </item>
     
     <item>

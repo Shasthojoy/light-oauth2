@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Token Endpoint - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <meta name="generator" content="Hugo 0.20.6" />
+
+    
+    <meta name="description" content="Light OAuth2 Docs">
+    
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/token/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/token/">
+    <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot');
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/light-oauth2/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Token Endpoint
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-oauth2" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/light-oauth2/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light OAuth2 - OAuth2 Serivces based on light-4j <span class="version">1.4.3</span></strong>
+        
+          <br>
+          networknt/light-oauth2
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-oauth2/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-oauth2/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/light-oauth2/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/light-oauth2/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Services" href="https://networknt.github.io/light-oauth2/services/">
+	
+	Services
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorials" href="https://networknt.github.io/light-oauth2/tutorials/">
+	
+	Tutorials
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Examples" href="https://networknt.github.io/light-oauth2/example/">
+	
+	Examples
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tools" href="https://networknt.github.io/light-oauth2/tools/">
+	
+	Tools
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="References" href="https://networknt.github.io/light-oauth2/reference/">
+	
+	References
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-oauth2/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/light-oauth2/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/light-oauth2/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Token Endpoint </h1>
+
+			
+
+<h1 id="token">Token</h1>
+
+<p>This is a post endpoint to get JSON web tokens. Currently, it support three different
+grant types: authorization_code, client_credentials and password.</p>
+
+<h2 id="authorization-code-grant-type">Authorization Code Grant Type</h2>
+
+<h3 id="request">Request</h3>
+
+<p>The client makes a request to the token endpoint by sending the following
+parameters using the &ldquo;application/x-www-form-urlencoded&rdquo; format.</p>
+
+<ul>
+<li>grant_type
+<br /></li>
+</ul>
+
+<p>REQUIRED. Value MUST be set to &ldquo;authorization_code&rdquo;.</p>
+
+<ul>
+<li>code
+<br /></li>
+</ul>
+
+<p>REQUIRED.  The authorization code received from the authorization server.</p>
+
+<ul>
+<li>redirect_uri
+<br /></li>
+</ul>
+
+<p>REQUIRED, if the &ldquo;redirect_uri&rdquo; parameter was included in the authorization
+request, and their values MUST be identical.</p>
+
+<ul>
+<li>client_id:client_secret
+<br /></li>
+</ul>
+
+<p>REQUIRED, as BASIC authorization header with encoded client_id:client_secret
+to authenticate with the authorization server.</p>
+
+<ul>
+<li>code_verifier</li>
+</ul>
+
+<p>OPTIONAL, PKCE code verifier that used by Mobile Native App</p>
+
+<h3 id="response">Response</h3>
+
+<p>If the access token request is valid and authorized, the authorization server
+issues an access token and a refresh token.  If the request client
+authentication failed or is invalid, the authorization server returns an error
+response.</p>
+
+<h2 id="client-credentials-grant-type">Client Credentials Grant Type</h2>
+
+<p>The client can request an access token using only its client credentials
+(or other supported means of authentication) when the client is requesting
+access to the protected resources under its control, or those of another
+resource owner that have been previously arranged with the authorization
+server.</p>
+
+<h3 id="request-1">Request</h3>
+
+<p>The client makes a request to the token endpoint by adding the following
+parameters using the &ldquo;application/x-www-form-urlencoded&rdquo; format with a
+character encoding of UTF-8 in the HTTP request entity-body:</p>
+
+<ul>
+<li>grant_type
+<br /></li>
+</ul>
+
+<p>REQUIRED. Value MUST be set to &ldquo;client_credentials&rdquo;.</p>
+
+<ul>
+<li>scope
+<br /></li>
+</ul>
+
+<p>OPTIONAL. The scope of the access request.</p>
+
+<ul>
+<li>client_id:client_secret
+<br /></li>
+</ul>
+
+<p>REQUIRED, as BASIC authorization header with encoded client_id:client_secret
+to authenticate with the authorization server.</p>
+
+<h3 id="response-1">Response</h3>
+
+<p>If the access token request is valid and authorized, the authorization server
+issues an access token. A refresh token SHOULD NOT be included. If the request
+failed client authentication or is invalid, the authorization server returns
+an error response.</p>
+
+<h2 id="resource-owner-password-credentials-grant-type">Resource Owner Password Credentials Grant Type</h2>
+
+<p>The resource owner password credentials grant type is suitable in cases where
+the resource owner has a trust relationship with the client, such as the device
+operating system or a highly privileged application. The authorization server
+should take special care when enabling this grant type and only allow it when
+other flows are not viable. In this implementation, only client registered as
+trusted can use password grant type.</p>
+
+<p>This grant type is suitable for clients capable of obtaining the resource owner&rsquo;s
+credentials (username and password, typically using an interactive form).  It is
+also used to migrate existing clients using direct authentication schemes such as
+HTTP Basic or Digest authentication to OAuth by converting the stored credentials
+to an access token.</p>
+
+<h3 id="request-2">Request</h3>
+
+<p>The client makes a request to the token endpoint by adding the following
+parameters using the &ldquo;application/x-www-form-urlencoded&rdquo; format with a character
+encoding of UTF-8 in the HTTP request entity-body:</p>
+
+<ul>
+<li>grant_type
+<br /></li>
+</ul>
+
+<p>REQUIRED. Value MUST be set to &ldquo;password&rdquo;.</p>
+
+<ul>
+<li>username</li>
+</ul>
+
+<p>REQUIRED. The resource owner username.</p>
+
+<ul>
+<li>password</li>
+</ul>
+
+<p>REQUIRED. The resource owner password.</p>
+
+<ul>
+<li>scope
+<br /></li>
+</ul>
+
+<p>OPTIONAL. The scope of the access request.</p>
+
+<ul>
+<li>client_id:client_secret
+<br /></li>
+</ul>
+
+<p>REQUIRED, as BASIC authorization header with encoded client_id:client_secret
+to authenticate with the authorization server.</p>
+
+<h3 id="response-2">Response</h3>
+
+<p>If the access token request is valid and authorized, the authorization server
+issues an access token and a refresh token. If the request failed client
+authentication or is invalid, the authorization server returns an error response.</p>
+
+<h2 id="refresh-token-grant-type">Refresh Token Grant Type</h2>
+
+<p>If the authorization server issued a refresh token to the client, the client
+makes a refresh request to the token endpoint by adding the following parameters
+using the &ldquo;application/x-www-form-urlencoded&rdquo; format with a character encoding of
+UTF-8 in the HTTP request entity-body.</p>
+
+<ul>
+<li>grant_type</li>
+</ul>
+
+<p>REQUIRED.  Value MUST be set to &ldquo;refresh_token&rdquo;.</p>
+
+<ul>
+<li>refresh_token</li>
+</ul>
+
+<p>REQUIRED.  The refresh token issued to the client.</p>
+
+<ul>
+<li>scope</li>
+</ul>
+
+<p>OPTIONAL.  The scope of the access request. The requested scope MUST NOT include
+any scope not originally granted by the resource owner, and if omitted is treated
+as equal to the scope originally granted by the resource owner.</p>
+
+<p>Because refresh tokens are typically long-lasting credentials used to request
+additional access tokens, the refresh token is bound to the client to which it was
+issued. If the client type is confidential or the client was issued client credentials
+(or assigned other authentication requirements), the client MUST authenticate with the
+authorization server.</p>
+
+<p>The authorization server MUST:</p>
+
+<ul>
+<li><p>require client authentication for confidential clients or for any client that was
+issued client credentials (or with other authentication requirements),</p></li>
+
+<li><p>authenticate the client if client authentication is included and ensure that the
+refresh token was issued to the authenticated client, and</p></li>
+
+<li><p>validate the refresh token.</p></li>
+</ul>
+
+<p>If valid and authorized, the authorization server issues an access token. If the
+request failed verification or is invalid, the authorization server returns an error
+response.</p>
+
+<p>The authorization server issues a new refresh token and the client MUST discard the
+old refresh token and replace it with the new refresh token. The authorization server
+revoke the old refresh token after issuing a new refresh token to the client. The new
+refresh token scope MUST be identical to that of the refresh token included by the
+client in the request.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>There is only one post endpoint for this service and the default port is 6882.</p>
+
+<p>Here is the specification.</p>
+
+<pre><code>swagger: '2.0'
+
+info:
+  version: &quot;1.0.0&quot;
+  title: OAuth2 Service Token Service
+  description: OAuth2 Service that issues access tokens. 
+  contact:
+    email: stevehu@gmail.com
+  license:
+    name: &quot;Apache 2.0&quot;
+    url: &quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;
+host: oauth2.networknt.com
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/x-www-form-urlencoded   
+produces:
+  - application/json
+
+paths:
+  /oauth2/token:
+    post:
+      description: JSON object that contains access token
+      operationId: postToken
+      parameters:
+      - name: authorization
+        description: &quot;encoded client_id and client_secret pair&quot;
+        in: header
+        type: string
+        required: true      
+      - name: grant_type
+        type: string
+        enum: 
+        - authorization_code
+        - client_credentials
+        - password
+        - refresh_token
+        required: true
+        in: formData
+      - name: code
+        description: &quot;used in authorization_code to specify the code&quot; 
+        type: string
+        in: formData
+      - name: username
+        description: &quot;mandatory in password grant type&quot;
+        type: string
+        in: formData
+      - name: password
+        description: &quot;mandatory in password grant type&quot;
+        type: string
+        in: formData
+      - name: scope
+        description: &quot;used by all flows to specify scope in the access token&quot;
+        type: string
+        in: formData
+      - name: redirect_uri
+        description: &quot;used in authorization code if code endpoint with rediret_uri&quot;
+        type: string
+        in: formData
+      - name: refresh_token
+        description: &quot;refresh token used to get another access token&quot;
+        type: string
+        in: formData
+      responses:
+        200:
+          description: &quot;Successful Operation&quot;
+</code></pre>
+
+<h3 id="oauth2-token">/oauth2/token</h3>
+
+<p>When a post request is received, the following validations and processes will be performed.</p>
+
+<ul>
+<li>The handler expects a x-www-form-urlencoded form and if it doesn&rsquo;t exist, the following
+error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12000&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR12000&quot;,
+    &quot;message&quot;: &quot;UNABLE_TO_PARSE_FORM_DATA&quot;,
+    &quot;description&quot;: &quot;Unable to parse x-www-form-urlencoded form data.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>The parameter grant type should only allowed client_credentials and authorization_code. If
+other grant_type is passed in, the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12001&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR12001&quot;,
+    &quot;message&quot;: &quot;UNSUPPORTED_GRANT_TYPE&quot;,
+    &quot;description&quot;: &quot;Unsupported grant type %s. Only authorization_code and client_credentials are supported.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>When this endpoint is called, the client_id and client_secret must be base64 encoded and put
+into Authorization header. If there is no Authorization header available in the request, the
+following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11017&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11017&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_REQUEST_PARAMETER_HEADER_MISSING&quot;,
+    &quot;description&quot;: &quot;Header parameter '%s' is required on path '%s' but not found in request.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>When validating client_id and client_secret, the first thing is to check the client_id in
+the client cache in memory. If client_id doesn&rsquo;t exist, the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12014&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12014&quot;,
+    &quot;message&quot;: &quot;CLIENT_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Client %s is not found.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>The encoded client_id:client_secret combination will be decoded and then client secret will
+be checked with hashed and salted in memory client secret to make sure it is correct. If the
+client secret is not correct, the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12007&quot;: {
+    &quot;statusCode&quot;: 401,
+    &quot;code&quot;: &quot;ERR12007&quot;,
+    &quot;message&quot;: &quot;UNAUTHORIZED_CLIENT&quot;,
+    &quot;description&quot;: &quot;Unauthorized client with wrong client secret.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>If the basic client_id:client_secret cannot be decoded and parsed correctly, the following
+error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12004&quot;: {
+    &quot;statusCode&quot;: 401,
+    &quot;code&quot;: &quot;ERR12004&quot;,
+    &quot;message&quot;: &quot;INVALID_BASIC_CREDENTIALS&quot;,
+    &quot;description&quot;: &quot;Invalid Basic credentials %s.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>If there is no Basic authorization header passed in, i.e. a bearer token is passed in, the
+following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12003&quot;: {
+    &quot;statusCode&quot;: 401,
+    &quot;code&quot;: &quot;ERR12003&quot;,
+    &quot;message&quot;: &quot;INVALID_AUTHORIZATION_HEADER&quot;,
+    &quot;description&quot;: &quot;Invalid authorization header %s. Basic authentication with credentials is required.&quot;
+  }
+</code></pre>
+
+<p>If all validation is passed, a JWT token will be generated and returned in a JSON object.</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/service/" title="Service Registration">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Service Registration
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/code/" title="Authorization Code">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Authorization Code
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/light-oauth2\/';
+      var repo_id  = 'networknt\/light-oauth2';
+    
+    </script>
+
+    <script src="https://networknt.github.io/light-oauth2/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

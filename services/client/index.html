@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Client Registration - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <meta name="generator" content="Hugo 0.20.6" />
+
+    
+    <meta name="description" content="Light OAuth2 Docs">
+    
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/client/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/client/">
+    <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot');
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/light-oauth2/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Client Registration
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-oauth2" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/light-oauth2/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light OAuth2 - OAuth2 Serivces based on light-4j <span class="version">1.4.3</span></strong>
+        
+          <br>
+          networknt/light-oauth2
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-oauth2/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-oauth2/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/light-oauth2/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/light-oauth2/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Services" href="https://networknt.github.io/light-oauth2/services/">
+	
+	Services
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorials" href="https://networknt.github.io/light-oauth2/tutorials/">
+	
+	Tutorials
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Examples" href="https://networknt.github.io/light-oauth2/example/">
+	
+	Examples
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tools" href="https://networknt.github.io/light-oauth2/tools/">
+	
+	Tools
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="References" href="https://networknt.github.io/light-oauth2/reference/">
+	
+	References
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-oauth2/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/light-oauth2/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/light-oauth2/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Client Registration </h1>
+
+			
+
+<h1 id="client">Client</h1>
+
+<p>Before initiating the protocol, the client registers with the authorization server. The
+means through which the client registers with the authorization server are not defined
+in OAuth 2.0 specification.</p>
+
+<p>As an extension, we have implemented client registration/on-boarding as a micro service
+that exposes several endpoints.</p>
+
+<p>Before digging into the details of implementation, let&rsquo;s clarify some concepts about
+client.</p>
+
+<h2 id="client-type">Client Type</h2>
+
+<p>OAuth defines two client types, based on their ability to authenticate securely with
+the authorization server (i.e., ability to maintain the confidentiality of their
+client credentials):</p>
+
+<ul>
+<li>confidential</li>
+</ul>
+
+<p>Clients capable of maintaining the confidentiality of their credentials (e.g., client
+implemented on a secure server with restricted access to the client credentials), or
+capable of secure client authentication using other means.</p>
+
+<ul>
+<li>public</li>
+</ul>
+
+<p>Clients incapable of maintaining the confidentiality of their credentials (e.g.,
+clients executing on the device used by the resource owner, such as an installed
+native application or a web browser-based application), and incapable of secure
+client authentication via any other means.</p>
+
+<p>Above are standard client types defined in the specification and we have added
+another one to control which client can issue resource owner password credentials
+grant request.</p>
+
+<ul>
+<li>trusted</li>
+</ul>
+
+<p>These clients are marked as trusted and they are the only clients that can issue
+resource owner password credentials grant type. For API management team, please
+make sure that trusted client is also confidential and the client and resource
+must be deployed and managed by the same organization as this flow is not as
+secure as authorization code and client credentials flows.</p>
+
+<p>The client type designation is based on the authorization server&rsquo;s definition of
+secure authentication and its acceptable exposure levels of client credentials.<br />
+The authorization server does not make assumptions about the client type.</p>
+
+<p>A client may be implemented as a distributed set of components or services, each
+with a different client type and security context (e.g., a distributed client with
+both a confidential server-based component and a public browser-based component).<br />
+In this case, the client should register each component or service as a separate
+client.</p>
+
+<p>In a microservices architecture, a service might call other services to fulfill
+its request, in this case, it should register itself as a service and a client.
+That means the owner needs to follow both service on-boarding and client on-boarding
+processes.</p>
+
+<h2 id="client-profile">Client Profile</h2>
+
+<p>This specification has been designed around the following client profiles:</p>
+
+<ul>
+<li>web application (web server)</li>
+</ul>
+
+<p>A web application is a confidential client running on a web server. Resource owners
+access the client via an HTML user interface rendered in a user-agent on the device
+used by the resource owner. The client credentials as well as any access token issued
+to the client are stored on the web server and are not exposed to or accessible by
+the resource owner.</p>
+
+<ul>
+<li>user-agent-based application (browser)
+<br /></li>
+</ul>
+
+<p>A user-agent-based application is a public client in which the client code is
+downloaded from a web server and executes within a user-agent (e.g., web browser) on
+the device used by the resource owner. Protocol data and credentials are easily
+accessible (and often visible) to the resource owner. Since such applications
+reside within the user-agent, they can make seamless use of the user-agent
+capabilities when requesting authorization.</p>
+
+<ul>
+<li>native application (mobile)</li>
+</ul>
+
+<p>A native application is a public client installed and executed on the device used by
+the resource owner. Protocol data and credentials are accessible to the resource owner.<br />
+It is assumed that any client authentication credentials included in the application can
+be extracted. On the other hand, dynamically issued credentials such as access tokens or
+refresh tokens can receive an acceptable level of protection. At a minimum, these
+credentials are protected from hostile servers with which the application may interact.<br />
+On some platforms, these credentials might be protected from other applications residing
+on the same device.</p>
+
+<p>The specification only mentioned above client profiles and the following two profiles
+are added in our OAuth 2.0 implementation.</p>
+
+<ul>
+<li>batch application (batch)</li>
+</ul>
+
+<p>Batch jobs are very similar with web application but they are managed by enterprise
+scheduler and executed in a projected environment. It is considered as confidential
+client.</p>
+
+<ul>
+<li>service (service)</li>
+</ul>
+
+<p>Services are usually protected as resources but in a microservices architecture, a
+service can also be a client to call other services or resources. These services
+normally running within light-weight containers in a secured environment. And they
+are considered as confidential clients.</p>
+
+<h2 id="client-identifier">Client Identifier</h2>
+
+<p>The authorization server issues the registered client a client identifier - a unique
+string representing the registration information provided by the client. The client
+identifier is not a secret; it is exposed to the resource owner and MUST NOT be used
+alone for client authentication. The client identifier is unique to the authorization
+server. In our implementation, it is a UUID generated on the server. Here is an example:</p>
+
+<pre><code>f7d42348-c647-4efb-a52d-4c5787421e72
+</code></pre>
+
+<h2 id="client-secret">Client Secret</h2>
+
+<p>Clients in possession of a client secret MAY use the HTTP Basic authentication scheme
+as defined in [RFC2617] to authenticate with the authorization server. The client
+identifier is encoded using the &ldquo;application/x-www-form-urlencoded&rdquo; encoding algorithm
+, and the encoded value is used as the username; the client secret is encoded using
+the same algorithm and used as the password. The authorization server supports the HTTP
+Basic authentication scheme for authenticating clients that were issued a client secret.</p>
+
+<p>For example (with extra line breaks for display purposes only):</p>
+
+<pre><code>     Authorization: Basic czZCaGRSa3F0Mzo3RmpmcDBaQnIxS3REUmJuZlZkbUl3
+</code></pre>
+
+<h2 id="other-authentication-methods">Other Authentication Methods</h2>
+
+<p>Currently we don&rsquo;t support other authentication method but we are open to support others
+if there are request from our users.</p>
+
+<h2 id="unregistered-clients">Unregistered Clients</h2>
+
+<p>Due to security reasons, all client must be registered before authenticated on the server.
+Unregistered clients are not supported on this implementation.</p>
+
+<h2 id="client-micro-service">Client Micro Service</h2>
+
+<p>This service has several endpoints and listening to port 6884.</p>
+
+<p>Here is the specification.</p>
+
+<pre><code>swagger: '2.0'
+
+info:
+  version: &quot;1.0.0&quot;
+  title: OAuth2 Client Registration
+  description: OAuth2 Client Registration microservices endpoints. 
+  contact:
+    email: stevehu@gmail.com
+  license:
+    name: &quot;Apache 2.0&quot;
+    url: &quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;
+host: oauth2.networknt.com
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /oauth2/client:
+    post:
+      description: Return a client object
+      operationId: createClient
+      parameters:
+      - in: &quot;body&quot;
+        name: &quot;body&quot;
+        description: &quot;Client object that needs to be added&quot;
+        required: true
+        schema:
+          $ref: &quot;#/definitions/Client&quot;      
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: &quot;#/definitions/Client&quot;          
+      security:
+      - client_auth:
+        - &quot;oauth.client.w&quot;
+    put:
+      description: Return the updated client
+      operationId: updateClient
+      parameters:
+      - in: &quot;body&quot;
+        name: &quot;body&quot;
+        description: &quot;Client object that needs to be added&quot;
+        required: true
+        schema:
+          $ref: &quot;#/definitions/Client&quot;      
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: &quot;#/definitions/Client&quot;          
+      security:
+      - client_auth:
+        - &quot;oauth.client.w&quot;
+    get:
+      description: Return all clients
+      operationId: getAllClient
+      parameters:
+      - name: &quot;page&quot;
+        in: &quot;query&quot;
+        description: &quot;Page number&quot;
+        required: true
+        type: &quot;integer&quot;
+        format: &quot;int32&quot;
+      - name: &quot;pageSize&quot;
+        in: &quot;query&quot;
+        description: &quot;Pag size&quot;
+        required: false
+        type: &quot;integer&quot;
+        format: &quot;int32&quot;
+      - name: &quot;clientName&quot;
+        in: &quot;query&quot;
+        description: &quot;Partial clientName for filter&quot;
+        required: false
+        type: &quot;string&quot;
+      responses:
+        200:
+          description: &quot;successful operation&quot;
+          schema:
+            type: &quot;array&quot;
+            items:
+              $ref: &quot;#/definitions/Client&quot;
+      security:
+      - client_auth:
+        - &quot;oauth.client.r&quot;
+          
+  /oauth2/client/{clientId}:
+    delete:
+      description: Delete a client by Id
+      operationId: deleteClient
+      parameters:
+      - name: &quot;clientId&quot;
+        in: &quot;path&quot;
+        description: &quot;Client Id&quot;
+        required: true
+        type: &quot;string&quot;
+      responses:
+        400:
+          description: &quot;Invalid clientId supplied&quot;
+        404:
+          description: &quot;Client not found&quot;
+      security:
+        - client_auth:
+          - oauth.client.w
+    get:
+      description: Get a client by Id
+      operationId: getClient
+      parameters:
+      - name: &quot;clientId&quot;
+        in: &quot;path&quot;
+        description: &quot;Client Id&quot;
+        required: true
+        type: &quot;string&quot;
+      responses:
+        200: 
+          description: Successful response
+          schema:
+            $ref: &quot;#/definitions/Client&quot;          
+        400:
+          description: &quot;Invalid clientId supplied&quot;
+        404:
+          description: &quot;Client not found&quot;
+      security:
+        - client_auth:
+          - oauth.client.r
+          - oauth.client.w
+
+securityDefinitions:
+  client_auth:
+    type: &quot;oauth2&quot;
+    authorizationUrl: &quot;http://localhost:8888/oauth2/code&quot;
+    flow: &quot;implicit&quot;
+    scopes:
+      oauth.client.w: &quot;write oauth client&quot;
+      oauth.client.r: &quot;read oauth client&quot;
+definitions:
+  Client:
+    type: &quot;object&quot;
+    required:
+    - clientType
+    - clientProfile
+    - clientName
+    - clientDesc
+    - ownerId
+    - scope
+    properties:
+      clientId:
+        type: &quot;string&quot;
+        description: &quot;a unique client id&quot;
+      clientSecret:
+        type: &quot;string&quot;
+        description: &quot;client secret&quot;
+      clientType:
+        type: &quot;string&quot;
+        description: &quot;client type&quot;
+        enum:
+        - confidential
+        - public
+        - trusted
+      clientProfile:
+        type: &quot;string&quot;
+        description: &quot;client profile&quot;
+        enum:
+        - webserver
+        - browser
+        - mobile
+        - service
+        - batch
+      clientName:
+        type: &quot;string&quot;
+        description: &quot;client name&quot;
+      clientDesc:
+        type: &quot;string&quot;
+        description: &quot;client description&quot;
+      ownerId:
+        type: &quot;string&quot;
+        description: &quot;client owner id&quot;
+      scope:
+        type: &quot;string&quot;
+        description: &quot;client scope separated by space&quot;
+      redirectUri:
+        type: &quot;string&quot;
+        description: &quot;redirect uri&quot;
+      createDt:
+        type: &quot;string&quot;
+        format: &quot;date-time&quot;
+        description: &quot;create date time&quot;
+      updateDt:
+        type: &quot;string&quot;
+        format: &quot;date-time&quot;
+        description: &quot;update date time&quot;
+
+</code></pre>
+
+<h3 id="oauth2-client-clientid-delete">/oauth2/client/{clientId}@delete</h3>
+
+<p>This endpoint is used to delete existing client. The following validation will be
+performed in the service.</p>
+
+<ul>
+<li>If clientId cannot be found in the in-memory grid, then the following error will
+be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12014&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12014&quot;,
+    &quot;message&quot;: &quot;CLIENT_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Client %s is not found.&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-client-clientid-get">/oauth2/client/{clientId}@get</h3>
+
+<p>This endpoint is used to get a particular client with clientId. The following
+validation will be performed in the service.</p>
+
+<ul>
+<li>If clientId cannot be found in the in-memory grid, then the following error will
+be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12014&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12014&quot;,
+    &quot;message&quot;: &quot;CLIENT_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Client %s is not found.&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-client-get">/oauth2/client@get</h3>
+
+<p>This endpoint gets all the clients from client service with filter and sorted on
+clientName. A page query parameter is mandatory and pageSize and clientName filter
+are optional.</p>
+
+<ul>
+<li>page</li>
+</ul>
+
+<p>Page number which must be specified. It starts with 1 and an empty list will
+be returned if the page is greater than the last page.</p>
+
+<ul>
+<li>pageSize</li>
+</ul>
+
+<p>Default pageSize is 10 and you can overwrite it with another number. Please don&rsquo;t
+use a big number due to performance reason.</p>
+
+<ul>
+<li>clientName</li>
+</ul>
+
+<p>This is the only filter available and it supports filter by start with a few characters.
+For example, &ldquo;clientName=abc&rdquo; means any clientName starts with &ldquo;abc&rdquo;. The result is also
+sorted by clientName in the pagination.</p>
+
+<p>The following validation will be performed in the service.</p>
+
+<ul>
+<li>If page is missing from the query parameter, an error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11000&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11000&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_REQUEST_PARAMETER_QUERY_MISSING&quot;,
+    &quot;description&quot;: &quot;Query parameter '%s' is required on path '%s' but not found in request.&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-client-post">/oauth2/client@post</h3>
+
+<p>This endpoint is used to create a new client. This usually will be called from light-portal
+and the following validations will be performed before a new client is added.</p>
+
+<ul>
+<li>Verify that clientId exist in the cache. The clientId is generated as a UUID so this
+cannot be triggered. It is implemented this way just want to be in sync with other
+services.</li>
+</ul>
+
+<pre><code>  &quot;ERR12019&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR12019&quot;,
+    &quot;message&quot;: &quot;CLIENT_ID_EXISTS&quot;,
+    &quot;description&quot;: &quot;Client id %s exists.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Verify that ownerId is in user cache in memory. If it doesn&rsquo;t exist, the following
+error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12013&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12013&quot;,
+    &quot;message&quot;: &quot;USER_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;User %s is not found.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure the clientType is from a list of valid values. If not, an error message
+will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11004&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11004&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_SCHEMA&quot;,
+    &quot;description&quot;: &quot;Schema Validation Error - %s&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure that clientProfile is from a list of valid values. If not, an error
+message will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11004&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11004&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_SCHEMA&quot;,
+    &quot;description&quot;: &quot;Schema Validation Error - %s&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-client-put">/oauth2/client@put</h3>
+
+<p>This endpoint is used to update an existing client. This usually will be called from
+light-portal and the following validations will be performed before a client is updated.</p>
+
+<ul>
+<li>Verify that clientId exist in the cache. If clientId doesn&rsquo;t existing the cache, an
+error message will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12014&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12014&quot;,
+    &quot;message&quot;: &quot;CLIENT_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Client %s is not found.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Verify that ownerId is in user cache in memory. If it doesn&rsquo;t exist, the following
+error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12013&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12013&quot;,
+    &quot;message&quot;: &quot;USER_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;User %s is not found.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure the clientType is from a list of valid values. If not, an error message
+will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11004&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11004&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_SCHEMA&quot;,
+    &quot;description&quot;: &quot;Schema Validation Error - %s&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure that clientProfile is from a list of valid values. If not, an error
+message will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11004&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11004&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_SCHEMA&quot;,
+    &quot;description&quot;: &quot;Schema Validation Error - %s&quot;
+  }
+</code></pre>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/user/" title="User Management">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              User Management
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/service/" title="Service Registration">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              Service Registration
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/light-oauth2\/';
+      var repo_id  = 'networknt\/light-oauth2';
+    
+    </script>
+
+    <script src="https://networknt.github.io/light-oauth2/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

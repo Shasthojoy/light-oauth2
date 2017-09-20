@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>OpenID Connect - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <title>Refresh Token - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
     <meta name="generator" content="Hugo 0.20.6" />
 
     
     <meta name="description" content="Light OAuth2 Docs">
     
-    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/openid/">
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/refresh-token/">
     
     <meta name="author" content="Steve Hu">
     
 
-    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/openid/">
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/refresh-token/">
     <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
     <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
     <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        OpenID Connect
+        Refresh Token
       </div>
     </div>
 
@@ -407,13 +407,229 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>OpenID Connect </h1>
+			<h1>Refresh Token </h1>
 
 			
 
-<h2 id="references">References</h2>
+<h1 id="refresh-token">Refresh Token</h1>
 
-<p><a href="https://medium.com/@darutk/full-scratch-implementor-of-oauth-and-openid-connect-talks-about-findings-55015f36d1c3">Full-Scratch Implementor of OAuth and OpenID Connect Talks About Findings</a></p>
+<p>Refresh Token is issued in Authorization Code Grant and Resource Owner Password Credentials
+Grant along with access token. Also, for maximum security, a refresh token is issued every
+time the old refresh token is used to renew an access token.</p>
+
+<p>This service is listening to port number 6886.</p>
+
+<p>Here is the specification</p>
+
+<pre><code>swagger: '2.0'
+
+info:
+  version: &quot;1.0.0&quot;
+  title: OAuth2 Refresh Token Management
+  description: OAuth2 refresh token management microservices endpoints. 
+  contact:
+    email: stevehu@gmail.com
+  license:
+    name: &quot;Apache 2.0&quot;
+    url: &quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;
+host: oauth2.networknt.com
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /oauth2/refresh_token:
+    get:
+      description: Return all refresh tokens
+      operationId: getAllRefreshToken
+      parameters:
+      - name: &quot;page&quot;
+        in: &quot;query&quot;
+        description: &quot;Page number&quot;
+        required: true
+        type: &quot;integer&quot;
+        format: &quot;int32&quot;
+      - name: &quot;pageSize&quot;
+        in: &quot;query&quot;
+        description: &quot;Pag size&quot;
+        required: false
+        type: &quot;integer&quot;
+        format: &quot;int32&quot;
+      - name: &quot;userId&quot;
+        in: &quot;query&quot;
+        description: &quot;Partial userId for filter&quot;
+        required: false
+        type: &quot;string&quot;
+      responses:
+        200:
+          description: &quot;successful operation&quot;
+          schema:
+            type: &quot;array&quot;
+            items:
+              $ref: &quot;#/definitions/RefreshToken&quot;
+      security:
+      - refresh_token_auth:
+        - &quot;oauth.refresh_token.r&quot;
+          
+  /oauth2/refresh_token/{refreshToken}:
+    delete:
+      description: Delete a refresh token
+      operationId: deleteRefreshToken
+      parameters:
+      - name: &quot;refreshToken&quot;
+        in: &quot;path&quot;
+        description: &quot;Refresh Token&quot;
+        required: true
+        type: &quot;string&quot;
+      responses:
+        400:
+          description: &quot;Invalid refresh token supplied&quot;
+        404:
+          description: &quot;Refresh token not found&quot;
+      security:
+        - refresh_token_auth:
+          - oauth.refresh_token.w
+    get:
+      description: Get a refresh token
+      operationId: getRefreshToken
+      parameters:
+      - name: &quot;refreshToken&quot;
+        in: &quot;path&quot;
+        description: &quot;Refresh token&quot;
+        required: true
+        type: &quot;string&quot;
+      responses:
+        200: 
+          description: Successful response
+          schema:
+            $ref: &quot;#/definitions/RefreshToken&quot;          
+        400:
+          description: &quot;Invalid refresh token supplied&quot;
+        404:
+          description: &quot;Refresh token not found&quot;
+      security:
+        - refresh_token_auth:
+          - oauth.refresh_token.r
+          - oauth.refresh_token.w
+
+securityDefinitions:
+  refresh_token_auth:
+    type: &quot;oauth2&quot;
+    authorizationUrl: &quot;http://localhost:8888/oauth2/code&quot;
+    flow: &quot;implicit&quot;
+    scopes:
+      oauth.refresh_token.w: &quot;write oauth refresh token&quot;
+      oauth.refresh_token.r: &quot;read oauth refresh token&quot;
+definitions:
+  RefreshToken:
+    type: &quot;object&quot;
+    required:
+    - &quot;refreshToken&quot;
+    - &quot;userId&quot;
+    - &quot;clientId&quot;
+    properties:
+      refreshToken:
+        type: &quot;string&quot;
+        description: &quot;refresh token&quot;
+      userId:
+        type: &quot;string&quot;
+        description: &quot;user id&quot;
+      clientId:
+        type: &quot;string&quot;
+        description: &quot;client id&quot;
+      scope:
+        type: &quot;string&quot;
+        description: &quot;service scopes separated by space&quot;
+
+</code></pre>
+
+<h2 id="implementation">Implementation</h2>
+
+<h3 id="oauth2-refresh-token-get">/oauth2/refresh_token@get</h3>
+
+<p>This endpoint gets all the issued refresh tokens with filter and sorted on
+userId. A page query parameter is mandatory. pageSize and userId filter
+are optional.</p>
+
+<ul>
+<li>page</li>
+</ul>
+
+<p>Page number which must be specified. It starts with 1 and an empty list will
+be returned if the page is greater than the last page.</p>
+
+<ul>
+<li>pageSize</li>
+</ul>
+
+<p>Default pageSize is 10 and you can overwrite it with another number. Please don&rsquo;t
+use a big number due to performance reason.</p>
+
+<ul>
+<li>userId</li>
+</ul>
+
+<p>This is the only filter available and it supports filter by start with a few characters.
+For example, &ldquo;userId=abc&rdquo; means any userId starts with &ldquo;abc&rdquo;. The result is also
+sorted by userId in the pagination.</p>
+
+<p>The following validation will be performed in the service.</p>
+
+<ul>
+<li>If page is missing from the query parameter, an error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11000&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11000&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_REQUEST_PARAMETER_QUERY_MISSING&quot;,
+    &quot;description&quot;: &quot;Query parameter '%s' is required on path '%s' but not found in request.&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-refresh-token-refreshtoken-delete">/oauth2/refresh_token/{refreshToken}@delete</h3>
+
+<p>This endpoint is used to revoke a refresh token. It removes the refresh token from
+in memory data grid when calling this endpoint. On the user interface, please make
+sure the operator confirms the action before submitting the request to the service.</p>
+
+<p>Before the refresh token is deleted, the following validation will be performed.</p>
+
+<ul>
+<li>If refresh token doesn&rsquo;t exist in memory, then the following error will be
+returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12029&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12029&quot;,
+    &quot;message&quot;: &quot;REFRESH_TOKEN_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Refresh token %s is not found.&quot;
+  }
+</code></pre>
+
+<h3 id="oauth2-refresh-token-refreshtoken">/oauth2/refresh_token/{refreshToken}</h3>
+
+<p>This is the endpoint to get a particular refresh token information. The server
+will perform the following validations before the refresh token object is returned
+to the consumer.</p>
+
+<ul>
+<li>If refresh token doesn&rsquo;t exist in cache, then the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12029&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12029&quot;,
+    &quot;message&quot;: &quot;REFRESH_TOKEN_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Refresh token %s is not found.&quot;
+  }
+</code></pre>
 
 
 			<aside class="copyright" role="note">
@@ -432,34 +648,18 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://networknt.github.io/light-oauth2/services/code/" title="Authorization Code">
-        <span class="direction">
-          Previous
-        </span>
-        <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
-          <div class="stretch">
-            <div class="title">
-              Authorization Code
-            </div>
-          </div>
-        </div>
-      </a>
-  
   </div>
 
   <div class="next">
   
-      <a href="https://networknt.github.io/light-oauth2/services/pkce/" title="Proof key for code exchange (PKCE)">
+      <a href="https://networknt.github.io/light-oauth2/services/key/" title="Key Distribution">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Proof key for code exchange (PKCE)
+              Key Distribution
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

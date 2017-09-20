@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Authorization Code - Light OAuth2 - OAuth2 Serivces based on light-4j</title>
+    <meta name="generator" content="Hugo 0.20.6" />
+
+    
+    <meta name="description" content="Light OAuth2 Docs">
+    
+    <link rel="canonical" href="https://networknt.github.io/light-oauth2/services/code/">
+    
+    <meta name="author" content="Steve Hu">
+    
+
+    <meta property="og:url" content="https://networknt.github.io/light-oauth2/services/code/">
+    <meta property="og:title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta property="og:image" content="https://networknt.github.io/light-oauth2/images/logo.png">
+    <meta name="apple-mobile-web-app-title" content="Light OAuth2 - OAuth2 Serivces based on light-4j">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://networknt.github.io/light-oauth2/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot');
+        src: url('https://networknt.github.io/light-oauth2/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.woff')
+               format('woff'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.ttf')
+               format('truetype'),
+             url('https://networknt.github.io/light-oauth2/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/application.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://networknt.github.io/light-oauth2/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://networknt.github.io/light-oauth2/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-red palette-accent-teal">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Authorization Code
+      </div>
+    </div>
+
+    
+
+    
+    <div class="button button-github" role="button" aria-label="GitHub">
+      <a href="https://github.com/stevehu" title="@stevehu on GitHub" target="_blank" class="toggle-button icon icon-github"></a>
+    </div>
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/networknt/light-oauth2" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://networknt.github.io/light-oauth2/images/logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Light OAuth2 - OAuth2 Serivces based on light-4j <span class="version">1.4.3</span></strong>
+        
+          <br>
+          networknt/light-oauth2
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/networknt/light-oauth2/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/networknt/light-oauth2/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Getting started" href="https://networknt.github.io/light-oauth2/getting-started/">
+	
+	Getting started
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Architecture" href="https://networknt.github.io/light-oauth2/architecture/">
+	
+	Architecture
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Services" href="https://networknt.github.io/light-oauth2/services/">
+	
+	Services
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tutorials" href="https://networknt.github.io/light-oauth2/tutorials/">
+	
+	Tutorials
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Examples" href="https://networknt.github.io/light-oauth2/example/">
+	
+	Examples
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Tools" href="https://networknt.github.io/light-oauth2/tools/">
+	
+	Tools
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="References" href="https://networknt.github.io/light-oauth2/reference/">
+	
+	References
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Issues &amp; Help" href="https://github.com/networknt/light-oauth2/issues">
+	
+	Issues &amp; Help
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Roadmap" href="https://networknt.github.io/light-oauth2/roadmap/">
+	
+	Roadmap
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="License" href="https://www.apache.org/licenses/LICENSE-2.0">
+	
+	License
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Introduction" href="https://networknt.github.io/light-oauth2/index.html">
+	
+	Introduction
+</a>
+
+
+
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+          <li>
+            <a href="https://github.com/stevehu" target="_blank" title="@stevehu on GitHub">
+              @stevehu on GitHub
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="mailto:stevehu@gmail.com" title="Email of stevehu@gmail.com">
+              Contact via email
+            </a>
+          </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>Authorization Code </h1>
+
+			
+
+<h1 id="code">Code</h1>
+
+<p>This is a service that support authorization code grant type. The authorization
+code grant type is used to obtain both access tokens and refresh tokens and is
+optimized for confidential clients. Since this is a redirection-based flow, the
+client must be capable of interacting with the resource owner&rsquo;s user-agent
+(typically a web browser) and capable of receiving incoming requests (via
+redirection) from the authorization server.</p>
+
+<p>The service accepts user credentials and redirects back authorization code with
+redirect URI defined in the client registration or overwritten it by passing in
+a redirect URI in the request.</p>
+
+<h2 id="request">Request</h2>
+
+<p>The client constructs the request URI by adding the following parameters to the
+query component of the authorization endpoint URI using the
+&ldquo;application/x-www-form-urlencoded&rdquo; format.</p>
+
+<ul>
+<li>response_type</li>
+</ul>
+
+<p>REQUIRED. Value MUST be set to &ldquo;code&rdquo;.</p>
+
+<ul>
+<li>client_id</li>
+</ul>
+
+<p>REQUIRED. The client identifier.</p>
+
+<ul>
+<li>redirect_uri
+<br /></li>
+</ul>
+
+<p>OPTIONAL. Redirect URI.</p>
+
+<ul>
+<li>scope</li>
+</ul>
+
+<p>OPTIONAL. The scope of the access request.</p>
+
+<ul>
+<li>state
+<br /></li>
+</ul>
+
+<p>RECOMMENDED. An opaque value used by the client to maintain state between the
+request and callback. The authorization server includes this value when redirecting
+the user-agent back to the client. The parameter SHOULD be used for preventing
+cross-site request forgery.</p>
+
+<ul>
+<li>code_challenge</li>
+</ul>
+
+<p>OPTIONAL. PKCE Code challenge. Required for Mobile Native App</p>
+
+<ul>
+<li>code_challenge_method</li>
+</ul>
+
+<p>OPTIONAL. S256 or plain if platform doesn&rsquo;t support S256.</p>
+
+<h2 id="authorization-response">Authorization Response</h2>
+
+<p>If the resource owner grants the access request, the authorization server issues
+an authorization code and delivers it to the client by adding the following
+parameters to the query component of the redirection URI using the
+&ldquo;application/x-www-form-urlencoded&rdquo; format.</p>
+
+<ul>
+<li>code
+<br /></li>
+</ul>
+
+<p>REQUIRED. The authorization code generated by the authorization server.  The
+authorization code MUST expire shortly after it is issued to mitigate the risk
+of leaks. A maximum authorization code lifetime of 10 minutes is RECOMMENDED.<br />
+The client MUST NOT use the authorization code more than once. If an
+authorization code is used more than once, the authorization server MUST deny
+the request and SHOULD revoke (when possible) all tokens previously issued based
+on that authorization code. The authorization code is bound to the client
+identifier and redirection URI.</p>
+
+<ul>
+<li>state
+<br /></li>
+</ul>
+
+<p>REQUIRED if the &ldquo;state&rdquo; parameter was present in the client authorization
+request. The exact value received from the client.</p>
+
+<h2 id="error-response">Error Response</h2>
+
+<p>If the request fails due to a missing, invalid, or mismatching redirection URI,
+or if the client identifier is missing or invalid, the authorization server
+SHOULD inform the resource owner of the error and MUST NOT automatically redirect
+the user-agent to the invalid redirection URI.</p>
+
+<p>If the resource owner denies the access request or if the request fails for
+reasons other than a missing or invalid redirection URI, the authorization server
+informs the client by adding the following parameters to the query component of
+the redirection URI using the &ldquo;application/x-www-form-urlencoded&rdquo; format.</p>
+
+<h3 id="error">error</h3>
+
+<p>REQUIRED. A single ASCII [USASCII] error code from the following:</p>
+
+<ul>
+<li>invalid_request</li>
+</ul>
+
+<p>The request is missing a required parameter, includes an invalid parameter value,
+includes a parameter more than once, or is otherwise malformed.</p>
+
+<ul>
+<li>unauthorized_client</li>
+</ul>
+
+<p>The client is not authorized to request an authorization code using this method.</p>
+
+<ul>
+<li>access_denied
+<br /></li>
+</ul>
+
+<p>The resource owner or authorization server denied the request.</p>
+
+<ul>
+<li>unsupported_response_type</li>
+</ul>
+
+<p>The authorization server does not support obtaining an authorization code using
+this method.</p>
+
+<ul>
+<li>invalid_scope</li>
+</ul>
+
+<p>The requested scope is invalid, unknown, or malformed.</p>
+
+<ul>
+<li>server_error</li>
+</ul>
+
+<p>The authorization server encountered an unexpected condition that prevented it
+from fulfilling the request.</p>
+
+<p>(This error code is needed because a 500 Internal Server Error HTTP status code
+cannot be returned to the client via an HTTP redirect.)</p>
+
+<ul>
+<li>temporarily_unavailable</li>
+</ul>
+
+<p>The authorization server is currently unable to handle the request due to a
+temporary overloading or maintenance of the server.  (This error code is needed
+because a 503 Service Unavailable HTTP status code cannot be returned to the client
+via an HTTP redirect.)</p>
+
+<p>Values for the &ldquo;error&rdquo; parameter MUST NOT include characters outside the set
+%x20-21 / %x23-5B / %x5D-7E.</p>
+
+<h3 id="error-description">error_description</h3>
+
+<p>OPTIONAL. Human-readable ASCII [USASCII] text providing additional information,
+used to assist the client developer in understanding the error that occurred.</p>
+
+<p>Values for the &ldquo;error_description&rdquo; parameter MUST NOT include characters outside
+the set %x20-21 / %x23-5B / %x5D-7E.</p>
+
+<h3 id="error-uri">error_uri</h3>
+
+<p>OPTIONAL. A URI identifying a human-readable web page with information about the
+error, used to provide the client developer with additional information about the
+error.</p>
+
+<p>Values for the &ldquo;error_uri&rdquo; parameter MUST conform to the URI-reference syntax and
+thus MUST NOT include characters outside the set %x21 / %x23-5B / %x5D-7E.</p>
+
+<h3 id="state">state</h3>
+
+<p>REQUIRED if a &ldquo;state&rdquo; parameter was present in the client authorization request.<br />
+The exact value received from the client.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>There are two endpoints and the service default listening port is 6881.</p>
+
+<p>Here is the specification:</p>
+
+<pre><code>swagger: '2.0'
+
+info:
+  version: &quot;1.0.0&quot;
+  title: OAuth2 Service Authorization Code
+  description: OAuth2 Service that logs in user and provide authorization code. 
+  contact:
+    email: stevehu@gmail.com
+  license:
+    name: &quot;Apache 2.0&quot;
+    url: &quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;
+host: oauth2.networknt.com
+schemes:
+  - http
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /oauth2/code:
+    get:
+      description: Return 302 redirect with authorization code
+      operationId: getAuthCode
+      parameters:
+      - name: &quot;Authorization&quot;
+        description: &quot;encoded username:password mandatory if Basic Authentication is used&quot;
+        in: &quot;header&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;response_type&quot;
+        in: &quot;query&quot;
+        description: &quot;The response type for authorization code&quot;
+        required: true
+        type: &quot;string&quot;
+        enum:
+        - &quot;code&quot;
+      - name: &quot;client_id&quot;
+        in: &quot;query&quot;
+        description: &quot;The client id for authorization code&quot;
+        required: true
+        type: &quot;string&quot;
+      - name: &quot;redirect_uri&quot;
+        in: &quot;query&quot;
+        description: &quot;The redirect uri for authorization code&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;username&quot;
+        in: &quot;query&quot;
+        description: &quot;The user name for authorization code&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;password&quot;
+        in: &quot;query&quot;
+        description: &quot;The password for authorization code in clear text&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;state&quot;
+        in: &quot;query&quot;
+        description: &quot;to prevent cross-site request forgery&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;scope&quot;
+        in: &quot;query&quot;
+        description: &quot;scope of the request&quot;
+        required: false
+        type: &quot;string&quot;
+      responses:
+        302:
+          description: &quot;Successful Operation&quot;
+
+    post:
+      description: Return 302 redirect with authorization code
+      operationId: postAuthCode
+      consumes:
+      - &quot;application/x-www-form-urlencoded&quot;
+      produces:
+      - &quot;application/json&quot;
+      parameters:
+      - name: &quot;j_username&quot;
+        in: &quot;formData&quot;
+        description: &quot;User name&quot;
+        required: true
+        type: &quot;string&quot;
+      - name: &quot;j_password&quot;
+        in: &quot;formData&quot;
+        description: &quot;Password&quot;
+        required: true
+        type: &quot;string&quot;
+      - name: &quot;response_type&quot;
+        in: &quot;formData&quot;
+        description: &quot;Response type&quot;
+        required: true
+        type: &quot;string&quot;
+        enum: 
+        - &quot;code&quot;
+      - name: &quot;client_id&quot;
+        in: &quot;formData&quot;
+        description: &quot;Client Id&quot;
+        required: true
+        type: &quot;string&quot;
+      - name: &quot;redirect_uri&quot;
+        in: &quot;formData&quot;
+        description: &quot;Redirect Uri&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;state&quot;
+        in: &quot;formData&quot;
+        description: &quot;to prevent cross-site request forgery&quot;
+        required: false
+        type: &quot;string&quot;
+      - name: &quot;scope&quot;
+        in: &quot;query&quot;
+        description: &quot;scope of the request&quot;
+        required: false
+        type: &quot;string&quot;
+      responses:
+        302:
+          description: &quot;Successful Operation&quot;
+</code></pre>
+
+<h3 id="oauth2-code-get">/oauth2/code@get</h3>
+
+<p>The get endpoint is the most used as it is very simple and supported by all browsers
+without any customization. When request is received by the service, the following
+validations or processes are done before issuing a authorization code redirect.</p>
+
+<ul>
+<li><p>Make sure that user credentials are passed in. Otherwise, it will redirect the
+browser to display popup window to collect userId and password. The username and
+password will be passed in as Basic Authorization header. The passed in userId
+and password will be matched with cached password(which is hashed and salted). If
+userId and password combination is not valid, then a brand new popup window will
+be shown. Depending on browsers, an error message will be shown up after several
+times of retries.</p></li>
+
+<li><p>If password is incorrect, then the following error will return.</p></li>
+</ul>
+
+<pre><code>  &quot;ERR12016&quot;: {
+    &quot;statusCode&quot;: 401,
+    &quot;code&quot;: &quot;ERR12016&quot;,
+    &quot;message&quot;: &quot;INCORRECT_PASSWORD&quot;,
+    &quot;description&quot;: &quot;Incorrect password.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure that response_type and client_id are passed in as parameters. If not,
+the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR11000&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11000&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_REQUEST_PARAMETER_QUERY_MISSING&quot;,
+    &quot;description&quot;: &quot;Query parameter '%s' is required on path '%s' but not found in request.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>If response_type doesn&rsquo;t equal &ldquo;code&rdquo; then the following error will return</li>
+</ul>
+
+<pre><code>  &quot;ERR11002&quot;: {
+    &quot;statusCode&quot;: 400,
+    &quot;code&quot;: &quot;ERR11002&quot;,
+    &quot;message&quot;: &quot;VALIDATOR_REQUEST_PARAMETER_ENUM_INVALID&quot;,
+    &quot;description&quot;: &quot;Value '%s' for parameter '%s' is not allowed. Allowed values are &lt;%s&gt;.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Make sure client_id passed in is valid again in memory client cache. If not,
+then the following error will be returned.</li>
+</ul>
+
+<pre><code>  &quot;ERR12014&quot;: {
+    &quot;statusCode&quot;: 404,
+    &quot;code&quot;: &quot;ERR12014&quot;,
+    &quot;message&quot;: &quot;CLIENT_NOT_FOUND&quot;,
+    &quot;description&quot;: &quot;Client %s is not found.&quot;
+  }
+</code></pre>
+
+<ul>
+<li>As you can see from the specification, there is an optional parameter called
+redirect_uri. If this parameter is passed in, it will be used to redirect the
+authorization code. Otherwise, the default redirect_uri from client_id will be
+used. This is retrieved from in memory client cache. The url is populated when
+client is registered during on-boarding process.</li>
+</ul>
+
+<h3 id="oauth2-code-post">/oauth2/code@post</h3>
+
+<p>To be completed later</p>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2017 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/token/" title="Token Endpoint">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Token Endpoint
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://networknt.github.io/light-oauth2/services/openid/" title="OpenID Connect">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              OpenID Connect
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/networknt.github.io\/light-oauth2\/';
+      var repo_id  = 'networknt\/light-oauth2';
+    
+    </script>
+
+    <script src="https://networknt.github.io/light-oauth2/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
